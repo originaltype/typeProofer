@@ -6,6 +6,9 @@ Are you just like me fed up with using heavy and cumbersome InDesign files for p
 Use this script to proof your typefaces by running it in Drawbot app.
 It collects font files (.otf, .ttf), reads .txt files and saves a PDF with the text from the .txt files set in the fonts.
 
+![](https://github.com/originaltype/typeProofer/blob/main/img/Screen%20Shot%202021-04-19%20at%2016.22.00.png)
+
+
 
 # How to use this script
 * Download or clone this repository
