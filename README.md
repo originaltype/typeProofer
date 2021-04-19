@@ -22,10 +22,11 @@ It collects font files (.otf, .ttf), reads .txt files and saves a PDF with the t
 
 # To do
 - [ ] Add page template for large words setting
-- [ ] Save the PDF with time stamp and project name in the file name
+- [X] Save the PDF with time stamp and project name in the file name
 - [ ] Make lay-out dimensions and positions relative to the page so that you can easily change the page size
 - [ ] Make option to set proofing strings in various font sizes on the page
 - [ ] Make the order the fonts in the PDF based on weight and width class
+- [ ] Proof text with OT features activated
 
 # Credits
 This script was written while following [@roberto-arista's](https://github.com/roberto-arista) [Python for Designers course](https://pythonfordesigners.com/) so lot's of credits to him for his guidance and help.
