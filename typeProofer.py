@@ -18,7 +18,7 @@ txtFolder = './txt'
 
 # set font sizes
 fontSizeLarge = 48
-fontSizeParagraphSmall = 9
+fontSizeParagraph = 9
 
 FROM_MM_TO_PT = 2.834627813
 PAGE_FORMAT = 'A4Landscape'
@@ -49,7 +49,7 @@ def drawHeaderFooter():
     text(f'Date: {now:%Y-%m-%d %H:%M}', (MARGIN_X2, height()-14*FROM_MM_TO_PT), align='left')
     text(f'Fontfile: {fontName}', (MARGIN_X3, height()-14*FROM_MM_TO_PT))
     text('Characterset:' + ' ' + p.stem, (MARGIN_X4, height()-14*FROM_MM_TO_PT))
-    text(f'Page {pageCount()-1:0>2X}/', (MARGIN_X5, height()-14*FROM_MM_TO_PT), align='right')
+    text(f'Page {pageCount()-1:0>2d}/', (MARGIN_X5, height()-14*FROM_MM_TO_PT), align='right')
     text('Original Type', (MARGIN_X1, MARGIN_BOTTOM/2))
     
 # read lines from a texfile
@@ -67,7 +67,7 @@ def collectFilesPaths(folder, extension=''):
             paths.append(eachPath)
     return paths
 
-# draw the page
+# draw a large sample page
 def initPage():
     t = proofSet
     while len(t):
@@ -79,15 +79,15 @@ def initPage():
         t = textBox(f'{t}', (x, y, w, h))
         drawHeaderFooter()
         
-# draw the paragraph page
-def initPragraphPage():
+# draw a paragraph page
+def initParagraphPage():
     t = proofSet
     while len(t):
         newPage(PAGE_FORMAT)
         fill(1)
         rect(x, y, w, h)
         fill(0)
-        font(fontName, fontSizeParagraphSmall)
+        font(fontName, fontSizeParagraph)
         t = textBox(f'{t}', (x, y, w, h))
         drawHeaderFooter()
 
@@ -95,15 +95,14 @@ def initPragraphPage():
 # store fonts and txt files in a variable
 allFonts = collectFilesPaths(fontFolder)
 alltxtFiles = collectFilesPaths(txtFolder)
-print(alltxtFiles)
 
-# interate over all fonts and text files and draw the pages
+# iterate over all fonts and text files and draw the pages
 for eachFontPath in allFonts:
     for fileName in alltxtFiles:
         fontName = installFont(eachFontPath)
         proofSet = readStringsFromFile(fileName)
-        if proofSet is './txt/paragraph.txt':
-            initPragraphPage()
+        if fileName == './txt/paragraph.txt':
+            initParagraphPage()
         else:
             initPage()
     
