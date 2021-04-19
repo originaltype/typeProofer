@@ -125,7 +125,7 @@ totalPages = len(allPages)
 for page in allPages:
     # set the page as current context
     with page:
-        # draw a text in each of them
+        # draw the total pagecount in each of them
         typeAttributes()
         text(f'{totalPages}', (270*FROM_MM_TO_PT, height()-14*FROM_MM_TO_PT), align='left')
 
