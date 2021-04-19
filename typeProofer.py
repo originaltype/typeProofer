@@ -1,9 +1,10 @@
 """
 Make a PDF proof using a folder of fonts and a folder of txt files as input.
+If there is a file calles 'paragraph.txt' in the directory './txt', the script will use the text in that file to create a page with two columns paragraph text setting.
 """
 
 
-# --- Modules --- #
+# --- Modules ------------------------------------------------------------- #
 import datetime
 now = datetime.datetime.now()
 import os
@@ -11,19 +12,25 @@ from os.path import join, isfile
 from os import listdir
 from pathlib import Path
 
-# --- Constants --- #
+
+# --- Constants ------------------------------------------------------------- #
+
+# set your name in the footer
+myName = 'Original Type'
+
 # set paths to directories with fonts and txt files
 fontFolder = './fonts'
 txtFolder = './txt'
 
 # set font sizes
-fontSizeLarge = 48
-fontSizeParagraph = 9
+fontSizeLarge = 28
+fontSizeParagraph9 = 9
+fontSizeParagraph12 = 12
 
+# set page dimensions and positions for header and footer items
 FROM_MM_TO_PT = 2.834627813
 PAGE_FORMAT = 'A4Landscape'
 
-LINE_HEIGHT = 16
 MARGIN_BOTTOM = 20*FROM_MM_TO_PT
 MARGIN_X1 = 20*FROM_MM_TO_PT
 MARGIN_X2 = 70*FROM_MM_TO_PT
@@ -31,9 +38,16 @@ MARGIN_X3 = 120*FROM_MM_TO_PT
 MARGIN_X4 = 200*FROM_MM_TO_PT
 MARGIN_X5 = 270*FROM_MM_TO_PT
 
-x, y, w, h = MARGIN_X1, 20*FROM_MM_TO_PT, 262*FROM_MM_TO_PT, 165*FROM_MM_TO_PT
+# large sample textbox dimensions
+large = MARGIN_X1, 20*FROM_MM_TO_PT, 262*FROM_MM_TO_PT, 165*FROM_MM_TO_PT
 
-# --- Functions --- #
+# paragraph sample textbox dimensions
+ParagraphBox1 = MARGIN_X1, 20*FROM_MM_TO_PT, 121*FROM_MM_TO_PT, 162*FROM_MM_TO_PT
+ParagraphBox2 = MARGIN_X1*8, 20*FROM_MM_TO_PT, 121*FROM_MM_TO_PT, 162*FROM_MM_TO_PT
+
+
+# --- Functions ------------------------------------------------------------- #
+
 def typeAttributes():
     fill(0)
     stroke(None)
@@ -50,7 +64,7 @@ def drawHeaderFooter():
     text(f'Fontfile: {fontName}', (MARGIN_X3, height()-14*FROM_MM_TO_PT))
     text('Characterset:' + ' ' + p.stem, (MARGIN_X4, height()-14*FROM_MM_TO_PT))
     text(f'Page {pageCount()-1:0>2d}/', (MARGIN_X5, height()-14*FROM_MM_TO_PT), align='right')
-    text('Original Type', (MARGIN_X1, MARGIN_BOTTOM/2))
+    text(f'© {now:%Y}' + ' ' + myName, (MARGIN_X1, MARGIN_BOTTOM/2))
     
 # read lines from a texfile
 def readStringsFromFile(fileName):
@@ -67,31 +81,31 @@ def collectFilesPaths(folder, extension=''):
             paths.append(eachPath)
     return paths
 
-# draw a large sample page
+# draw a page
 def initPage():
-    t = proofSet
-    while len(t):
+    t1 = '\n'.join(proofSet)
+    t2 = '\n'.join(proofSet)
+    while len(t1):
         newPage(PAGE_FORMAT)
         fill(1)
-        rect(x, y, w, h)
         fill(0)
-        font(fontName, fontSizeLarge)
-        t = textBox(f'{t}', (x, y, w, h))
+        if fileName == './txt/paragraph.txt':
+            typeAttributes()
+            text(f'{fontName}'+' '+'9 pts', (MARGIN_X1, height()-25*FROM_MM_TO_PT))
+            font(fontName, fontSizeParagraph9)
+            t1 = textBox(f'{t1}', (ParagraphBox1))
+            typeAttributes()
+            text(f'{fontName}'+' '+'12 pts', (MARGIN_X1*8, height()-25*FROM_MM_TO_PT))
+            font(fontName, fontSizeParagraph12)
+            t2 = textBox(f'{t2}', (ParagraphBox2))
+        else:
+            font(fontName, fontSizeLarge)
+            t1 = textBox(f'{t1}', (large))
         drawHeaderFooter()
         
-# draw a paragraph page
-def initParagraphPage():
-    t = proofSet
-    while len(t):
-        newPage(PAGE_FORMAT)
-        fill(1)
-        rect(x, y, w, h)
-        fill(0)
-        font(fontName, fontSizeParagraph)
-        t = textBox(f'{t}', (x, y, w, h))
-        drawHeaderFooter()
 
-# --- Instructions --- #
+# --- Instructions ------------------------------------------------------------- #
+
 # store fonts and txt files in a variable
 allFonts = collectFilesPaths(fontFolder)
 alltxtFiles = collectFilesPaths(txtFolder)
@@ -101,10 +115,7 @@ for eachFontPath in allFonts:
     for fileName in alltxtFiles:
         fontName = installFont(eachFontPath)
         proofSet = readStringsFromFile(fileName)
-        if fileName == './txt/paragraph.txt':
-            initParagraphPage()
-        else:
-            initPage()
+        initPage()
     
 # get all pages
 allPages = pages()
