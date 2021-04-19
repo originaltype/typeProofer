@@ -18,9 +18,9 @@ It collects font files (.otf, .ttf), reads .txt files and saves a PDF with the t
 * Go to ```./proofs``` and open the PDF.
 
 # To do
-- Add page template for large words setting
-- Save file with time stamp and project name in file name
-- Make lay-out dimensions and positions relative to the page so that you can easily change the page size
+- [ ] Add page template for large words setting
+- [ ] Save file with time stamp and project name in file name
+- [ ] Make lay-out dimensions and positions relative to the page so that you can easily change the page size
 
 # Credits
 This script was written while following [@roberto-arista's](https://github.com/roberto-arista) [Python for Designers course](https://pythonfordesigners.com/) so lot's of credits to him for his guidance and help.
