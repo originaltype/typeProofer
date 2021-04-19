@@ -34,12 +34,10 @@ MARGIN_X5 = 270*FROM_MM_TO_PT
 x, y, w, h = MARGIN_X1, 20*FROM_MM_TO_PT, 262*FROM_MM_TO_PT, 165*FROM_MM_TO_PT
 
 # --- Functions --- #
-def typeAttributes(pointSize=8):
+def typeAttributes():
     fill(0)
     stroke(None)
-    familyName = 'ColomMono'
-    styleName = 'Regular'
-    font(f'{familyName}-{styleName}', pointSize)
+    font('SFMono-Regular', 8)
 
 # draw the header and footer
 def drawHeaderFooter():
@@ -92,8 +90,6 @@ def initPragraphPage():
         font(fontName, fontSizeParagraphSmall)
         t = textBox(f'{t}', (x, y, w, h))
         drawHeaderFooter()
-
-# --- Variables --- #
 
 # --- Instructions --- #
 # store fonts and txt files in a variable
