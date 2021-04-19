@@ -19,7 +19,7 @@ It collects font files (.otf, .ttf), reads .txt files and saves a PDF with the t
 
 # To do
 - [ ] Add page template for large words setting
-- [ ] Save file with time stamp and project name in file name
+- [ ] Save file with time stamp and project name in the file name
 - [ ] Make lay-out dimensions and positions relative to the page so that you can easily change the page size
 
 # Credits
