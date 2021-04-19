@@ -21,6 +21,7 @@ myName = 'Original Type'
 # set paths to directories with fonts and txt files
 fontFolder = './fonts'
 txtFolder = './txt'
+proofFolder = './proofs'
 
 # set font sizes
 fontSizeLarge = 28
@@ -37,6 +38,9 @@ MARGIN_X2 = 70*FROM_MM_TO_PT
 MARGIN_X3 = 120*FROM_MM_TO_PT
 MARGIN_X4 = 200*FROM_MM_TO_PT
 MARGIN_X5 = 270*FROM_MM_TO_PT
+
+# Open the PDF after saving in Preview True or False
+autoOpen = True
 
 # large sample textbox dimensions
 large = MARGIN_X1, 20*FROM_MM_TO_PT, 262*FROM_MM_TO_PT, 165*FROM_MM_TO_PT
@@ -56,7 +60,6 @@ def typeAttributes():
 # draw the header and footer
 def drawHeaderFooter():
     p = Path(fileName)
-    print(p.stem)
     projectName = fontName.split('-')
     typeAttributes()
     text('Project:' + ' ' + projectName[0], (MARGIN_X1, height()-14*FROM_MM_TO_PT), align='left')
@@ -129,7 +132,10 @@ for page in allPages:
         typeAttributes()
         text(f'{totalPages}', (270*FROM_MM_TO_PT, height()-14*FROM_MM_TO_PT), align='left')
 
-    
-saveImage("./proofs/typeProof.pdf")
-# if autoOpen:
-#     os.system(f"open -a Preview {'./proofs/typeProof.pdf'}")
+projectName = fontName.split('-')
+
+saveTo=f'{proofFolder}/{projectName[0]}-proof-{now:%Y-%m-%d}.pdf'
+saveImage(saveTo)
+
+if autoOpen:
+    os.system(f"open -a Preview {saveTo}")
