@@ -2,7 +2,7 @@
 A python script for proofing typefaces
 
 # Description
-Are you just like me fed up with using heavy and cumbersome InDesign files for proofing your fonts?
+Are you just like me fed up with using heavy and cumbersome InDesign files for proofing your fonts? Well... exit InDesign, here's typeProofer!
 Use this script to proof your typefaces by running it in Drawbot app.
 It collects font files (.otf, .ttf), reads .txt files and saves a PDF with the text from the .txt files set in the fonts.
 
