@@ -28,8 +28,8 @@ fontSizeParagraph9 = 9
 fontSizeParagraph12 = 12
 
 # set page dimensions and positions for header and footer items
-FROM_MM_TO_PT = 2.834627813
 PAGE_FORMAT = 'A4Landscape'
+FROM_MM_TO_PT = 2.834627813
 
 MARGIN_BOTTOM = 20*FROM_MM_TO_PT
 MARGIN_X1 = 20*FROM_MM_TO_PT
