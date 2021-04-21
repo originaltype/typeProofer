@@ -12,13 +12,13 @@ It collects font files (.otf, .ttf), reads .txt files and saves a PDF with the t
 
 # How to use this script
 * Download or clone this repository
-* Place your font files in the ```./fonts``` directory
-* Place your txt files with your proofing text strings in the ```./txt``` directory. If there is a .txt file present named ```paragraph.txt``` it will use the contents of this file to type set a page with a 2-column paragraph setting.
+* Place your font files in the ```/source/fonts``` directory
+* Place your txt files with your proofing text strings in the ```/source/txt``` directory. If there is a .txt file present named ```paragraph.txt``` it will use the contents of this file to type set a page with a 2-column paragraph setting.
 * Download and fire up [Drawbot](https://www.drawbot.com/)
 * Open ```typeProofer.py``` in Drawbot
 * Replace Original Type with your name between the quotation marks in ```myName = 'Original Type'```
 * Run the script
-* Go to ```./proofs``` and open the PDF.
+* Go to ```/source/proofs``` and open the PDF.
 
 # To do
 - [ ] Add page template for large words setting
