@@ -29,4 +29,4 @@ It collects font files (.otf, .ttf), reads .txt files and saves a PDF with the t
 - [ ] Proof text with OT features activated
 
 # Credits
-This script was written while following [@roberto-arista's](https://github.com/roberto-arista) [Python for Designers course](https://pythonfordesigners.com/) so lot's of credits to him for his guidance and help.
+This script was written applying the things I learned while following [@roberto-arista's](https://github.com/roberto-arista) great [Python for Designers course](https://pythonfordesigners.com/). Parts of the code in the first draft of the script we're written in a very make-do style, Roberto was so kind to afterwards clean up the code.

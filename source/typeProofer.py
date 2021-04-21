@@ -10,6 +10,7 @@ import os
 from os.path import join, isfile
 from os import listdir
 from pathlib import Path
+from operator import itemgetter, attrgetter, methodcaller
 from drawBot import fill, stroke, font, text, height, newPage, textBox
 from drawBot import installFont, pages, pageCount, saveImage
 from fontTools.ttLib.ttFont import TTFont
@@ -25,7 +26,7 @@ MY_NAME = 'Original Type'
 # set paths to directories with fonts and txt files
 FONT_FOLDER = './fonts'
 TXT_FOLDER = './txt'
-proofFolder = './proofs'
+PROOF_FOLDER = './proofs'
 
 # set font sizes
 FONT_SIZE_LARGE = 28
@@ -89,7 +90,8 @@ def collectFilesPaths(folder, extension=''):
     return paths
 
 def sortFonts(fontPaths):
-    return sorted(fontPaths, key=lambda ff: TTFont(file=ff)["OS/2"].usWeightClass)
+    return sorted(fontPaths, key=lambda ff: (-TTFont(file=ff)["OS/2"].usWidthClass, TTFont(file=ff)["OS/2"].usWeightClass, -TTFont(file=ff)["post"].italicAngle))
+
 
 def drawTwoColumnsLayout(txt, postscriptFontName):
     typeAttributes()
@@ -147,7 +149,7 @@ if __name__ == '__main__':
 
     projectName = postscriptFontName.split('-')
 
-    saveTo = f'{proofFolder}/{projectName[0]}-proof-{NOW:%Y-%m-%d}.pdf'
+    saveTo = f'{PROOF_FOLDER}/{projectName[0]}-proof-{NOW:%Y-%m-%d}.pdf'
     saveImage(saveTo)
 
     if AUTO_OPEN:
