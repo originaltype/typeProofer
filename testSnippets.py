@@ -1,6 +1,5 @@
-import os
+from pathlib import Path
 
-sc = '-sc'
-for fname in os.listdir('./txt'):
-    if sc in fname:
+for fname in Path('./txt').iterdir():
+    if fname.stem.endswith("-sc"):
         print(fname, "has the keyword")
