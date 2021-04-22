@@ -61,7 +61,7 @@ def typeAttributes():
     fill(0)
     stroke(None)
     font('SFMono-Regular', 8)
-    # openTypeFeatures(smcp=False)
+    openTypeFeatures(smcp=False)
 
 # draw the header and footer
 def drawHeaderFooter(postscriptFontName, fileName):
@@ -106,22 +106,28 @@ def drawTwoColumnsLayout(txt, postscriptFontName):
     # we don't aknowledge overflow, so we return an empty string
     return ""
 
-# def drawOneColumnsLayout(txt, postscriptFontName):
-#     font(postscriptFontName, FONT_SIZE_LARGE)
-#     txt = textBox(f'{txt}', (LARGE))
-#     return txt
-
 def drawOneColumnsLayout(txt, postscriptFontName):
     font(postscriptFontName, FONT_SIZE_LARGE)
-    for fname in Path('./txt').iterdir():
-        if fname.stem.endswith("-sc"):
-            openTypeFeatures(smcp=True)
-            fill(0)
-            rect(0,0,100,100)
-        else:
-            openTypeFeatures(smcp=False)
     txt = textBox(f'{txt}', (LARGE))
     return txt
+    
+def drawOneColumnsLayoutSMCP(txt, postscriptFontName):
+    font(postscriptFontName, FONT_SIZE_LARGE)
+    openTypeFeatures(smcp=True)
+    txt = textBox(f'{txt}', (LARGE))
+    return txt
+
+# def drawOneColumnsLayout(txt, postscriptFontName):
+#     font(postscriptFontName, FONT_SIZE_LARGE)
+#     for fname in Path('./txt').iterdir():
+#         if fname.stem.endswith("-sc"):
+#             openTypeFeatures(smcp=True)
+#             fill(0)
+#             rect(0,0,100,100)
+#         else:
+#             openTypeFeatures(smcp=False)
+#     txt = textBox(f'{txt}', (LARGE))
+#     return txt
 
 def drawProof(proofSet, postscriptFontName):
     txt = '\n'.join(proofSet)
@@ -130,9 +136,23 @@ def drawProof(proofSet, postscriptFontName):
         fill(0)
         if fileName == './txt/paragraph.txt':
             txt = drawTwoColumnsLayout(txt, postscriptFontName)
+        if fileName == './txt/04-lowercase-sc.txt':
+            txt = drawOneColumnsLayoutSMCP(txt, postscriptFontName)
         else:
             txt = drawOneColumnsLayout(txt, postscriptFontName)
         drawHeaderFooter(postscriptFontName, fileName)
+        
+# def drawProof(proofSet, postscriptFontName):
+#     txt = '\n'.join(proofSet)
+#     while txt:
+#         newPage(PAGE_FORMAT)
+#         fill(0)
+#         for fname in Path('./txt').iterdir():
+#             if fname.stem.endswith("paragraph"):
+#                 txt = drawTwoColumnsLayout(txt, postscriptFontName)
+#             else:
+#                 txt = drawOneColumnsLayout(txt, postscriptFontName)
+#         drawHeaderFooter(postscriptFontName, fileName)
 
 
 # --- Instructions ------------------------------------------------------------- #
