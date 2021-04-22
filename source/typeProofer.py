@@ -61,7 +61,6 @@ def typeAttributes():
     fill(0)
     stroke(None)
     font('SFMono-Regular', 8)
-    # openTypeFeatures(smcp=False)
 
 # draw the header and footer
 def drawHeaderFooter(postscriptFontName, fileName):
@@ -106,20 +105,8 @@ def drawTwoColumnsLayout(txt, postscriptFontName):
     # we don't aknowledge overflow, so we return an empty string
     return ""
 
-# def drawOneColumnsLayout(txt, postscriptFontName):
-#     font(postscriptFontName, FONT_SIZE_LARGE)
-#     txt = textBox(f'{txt}', (LARGE))
-#     return txt
-
 def drawOneColumnsLayout(txt, postscriptFontName):
     font(postscriptFontName, FONT_SIZE_LARGE)
-    for fname in Path('./txt').iterdir():
-        if fname.stem.endswith("-sc"):
-            openTypeFeatures(smcp=True)
-            fill(0)
-            rect(0,0,100,100)
-        else:
-            openTypeFeatures(smcp=False)
     txt = textBox(f'{txt}', (LARGE))
     return txt
 
