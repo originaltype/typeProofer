@@ -105,7 +105,7 @@ def drawTwoColumnsLayout(txt, postscriptFontName):
     # we don't aknowledge overflow, so we return an empty string
     return ""
 
-def drawOneColumnsLayout(txt, postscriptFontName):
+def drawOneColumnLayout(txt, postscriptFontName):
     font(postscriptFontName, FONT_SIZE_LARGE)
     txt = textBox(f'{txt}', (LARGE))
     return txt
@@ -118,15 +118,15 @@ def drawProof(proofSet, postscriptFontName):
         if fileName == './txt/paragraph.txt':
             txt = drawTwoColumnsLayout(txt, postscriptFontName)
         else:
-            txt = drawOneColumnsLayout(txt, postscriptFontName)
+            txt = drawOneColumnLayout(txt, postscriptFontName)
         drawHeaderFooter(postscriptFontName, fileName)
 
 
 # --- Instructions ------------------------------------------------------------- #
 if __name__ == '__main__':
     # store fonts and txt files in a variable
-    allFonts = sortFonts(collectFilesPaths(FONT_FOLDER))
-    alltxtFiles = collectFilesPaths(TXT_FOLDER)
+    allFonts = sortFonts(collectFilesPaths(FONT_FOLDER, ('ttf', 'otf')))
+    alltxtFiles = collectFilesPaths(TXT_FOLDER, 'txt')
 
     # iterate over all fonts and text files and draw the pages
     for eachFontPath in allFonts:
