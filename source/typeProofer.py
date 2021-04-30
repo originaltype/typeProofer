@@ -90,7 +90,7 @@ def collectFilesPaths(folder, extension=''):
     return paths
 
 def sortFonts(fontPaths):
-    return sorted(fontPaths, key=lambda ff: (-TTFont(file=ff)["OS/2"].usWidthClass, TTFont(file=ff)["OS/2"].usWeightClass, -TTFont(file=ff)["post"].italicAngle))
+    return sorted(fontPaths, key=lambda ff: (-TTFont(file=ff)["OS/2"].usWidthClass, -TTFont(file=ff)["post"].italicAngle, TTFont(file=ff)["OS/2"].usWeightClass))
 
 
 def drawTwoColumnsLayout(txt, postscriptFontName):
